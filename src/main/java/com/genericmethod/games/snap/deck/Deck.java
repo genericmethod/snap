@@ -35,6 +35,10 @@ public class Deck {
         }
     }
 
+    public Card dealCard(){
+        return shuffledCards.pop();
+    }
+
     public List<Card> getUnshuffledCardsCards() {
         return unshuffledCards;
     }

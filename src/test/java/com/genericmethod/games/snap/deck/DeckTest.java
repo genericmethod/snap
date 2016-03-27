@@ -20,4 +20,12 @@ public class DeckTest {
         assertEquals(52, deck.getShuffledCards().size());
     }
 
+    @Test
+    public void testDealCard(){
+        Deck deck = new Deck();
+        deck.shuffle();
+        deck.dealCard();
+        assertEquals(51, deck.getShuffledCards().size());
+    }
+
 }
