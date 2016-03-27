@@ -10,21 +10,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
-public class Snap {
+public class Snap extends CardGame {
 
-    private Map<String, CardPlayer> players;
     private Set<Deck> decks;
     private Stack<Card> pile = new Stack<Card>();
     private MatchMode matchMode;
-    private boolean gameIsFinished;
     private CardPlayer winner;
     private int totalNumberOfCards;
 
     public Snap(Map<String, CardPlayer> players, Set<Deck> decks, MatchMode matchMode) throws SnapException {
-        //validate
-        //Number of players must be greater than 2
-        //Number of decks must not be null and greater than 1
-        //Match mode must be defined
+
+        super(players);
 
         if (players == null || decks == null || matchMode == null) {
             throw new SnapException("Invalid parameters. Please make sure all parameters are defined");
@@ -35,79 +31,73 @@ public class Snap {
         }
 
         this.matchMode = matchMode;
-        this.players = players;
         this.decks = decks;
-        this.gameIsFinished = false;
         dealCards();
     }
 
     /**
      * Deals the cards to the players
      */
-    private void dealCards() {
+    public void dealCards() {
         totalNumberOfCards = 0;
         //for each deck, deal cards to the players until the deck is empty
         for (Deck deck : decks) {
             deck.shuffle();
             while (deck.isNotEmpty())
-                for (CardPlayer player : players.values()) {
+                for (CardPlayer player : getPlayers().values()) {
                     player.addCard(deck.dealCard());
                     totalNumberOfCards++;
                 }
         }
     }
 
-    /**
-     * Play the game
-     */
-    public void play() {
 
-        while (!gameIsFinished) {
+    public boolean executePlayerTurn(CardPlayer player) {
 
-            for (CardPlayer player : players.values()) {
+        if (player.hasCards()) {
+            System.out.println(player.getPlayerName() + " is playing his turn");
+            System.out.println(player.getPlayerName() + " number of cards = " + player.getCards().size());
+            System.out.println("Number of Cards in the Middle Pile is " + pile.size());
+            Card topCard = null;
 
-                if (player.hasCards()) {
-                    System.out.println(player.getPlayerName() + " is playing his turn");
-                    System.out.println(player.getPlayerName() + " number of cards = " + player.getCards().size());
-                    System.out.println("Number of Cards in the Middle Pile is " + pile.size());
-                    Card topCard = null;
-
-                    if (pile.size() != 0) {
-                        topCard = pile.peek();
-                    }
-
-                    Card playedCard = player.playCard();
-                    pile.push(playedCard);
-
-                    if (isSnap(matchMode, topCard, playedCard)) {
-                        //TODO: randomize the player that calls snap.
-                        //if the top card matches the played card
-                        //and remove all the cards from the middle pile
-                        player.addCards(pile);
-                        pile.removeAllElements();
-                        System.out.println(player.getPlayerName() + " called SNAP!");
-                    }
-
-                    //if the player has all the cards
-                    //then the game is finished and he is the winner
-                    if (playerHasAllCards(player)) {
-                        gameIsFinished = true;
-                        winner = player;
-                        System.out.println(player.getPlayerName() + " is the WINNER");
-                        break;
-                    }
-
-                    //if the pile size has all the cards
-                    //then deal the cards again
-                    if (pile.size() == totalNumberOfCards){
-                        dealCards();
-                    }
-
-                    System.out.println(player.getPlayerName() + " number of cards = " + player.getCards().size());
-                    System.out.println("Number of Cards in the Middle Pile is " + pile.size());
-                }
+            if (pile.size() != 0) {
+                topCard = pile.peek();
             }
+
+            Card playedCard = player.playCard();
+            pile.push(playedCard);
+
+            if (isSnap(matchMode, topCard, playedCard)) {
+                //TODO: randomize the player that calls snap.
+                //if the top card matches the played card
+                //and remove all the cards from the middle pile
+                player.addCards(pile);
+                pile.removeAllElements();
+                System.out.println(player.getPlayerName() + " called SNAP!");
+            }
+
+            //if the player has all the cards
+            //then the game is finished and he is the winner
+            if (playerHasAllCards(player)) {
+                setGameIsFinished(true);
+                winner = player;
+                System.out.println(player.getPlayerName() + " is the WINNER");
+                return true;
+            }
+
+            //if the pile size has all the cards
+            //then deal the cards again
+            if (pile.size() == totalNumberOfCards){
+                dealCards();
+            }
+
+            System.out.println(player.getPlayerName() + " number of cards = " + player.getCards().size());
+            System.out.println("Number of Cards in the Middle Pile is " + pile.size());
+
         }
+
+        return false;
+
     }
 
     private boolean playerHasAllCards(CardPlayer player) {
@@ -130,10 +120,6 @@ public class Snap {
             default:
                 return topCard.getRank() == playedCard.getRank();
         }
-    }
-
-    public Map<String, CardPlayer> getPlayers() {
-        return players;
     }
 
     public int getTotalNumberOfCards() {
