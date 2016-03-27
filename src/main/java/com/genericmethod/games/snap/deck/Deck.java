@@ -17,6 +17,7 @@ public class Deck {
     public Deck() {
         //initialise a set of 52 cards
         unshuffledCards = new ArrayList<Card>();
+        shuffledCards = new Stack<Card>();
         for (Suit suit : Suit.values()) {
             for(Rank rank: Rank.values()){
                 unshuffledCards.add(new Card(rank, suit));
@@ -45,5 +46,13 @@ public class Deck {
 
     public Stack<Card> getShuffledCards() {
         return shuffledCards;
+    }
+
+    public boolean isEmpty() {
+        return shuffledCards.empty();
+    }
+
+    public boolean isNotEmpty(){
+        return !isEmpty();
     }
 }
