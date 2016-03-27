@@ -16,6 +16,7 @@ public abstract class CardGame {
 
     public void play() {
         init();
+        System.out.println("Gameplay started!");
         while (gameIsNotFinished()) {
             for (CardPlayer player : getPlayers().values()) {
                 executePlayerTurn(player);
@@ -35,7 +36,7 @@ public abstract class CardGame {
     }
 
     public boolean gameIsNotFinished() {
-        return gameIsFinished;
+        return !isGameIsFinished();
     }
 
     public void setGameIsFinished(boolean gameIsFinished) {

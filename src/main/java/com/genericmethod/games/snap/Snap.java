@@ -54,6 +54,7 @@ public class Snap extends CardGame {
     @Override
     protected void init() {
         dealCards();
+        System.out.println("Cards dealt!");
     }
 
     public boolean executePlayerTurn(CardPlayer player) {
