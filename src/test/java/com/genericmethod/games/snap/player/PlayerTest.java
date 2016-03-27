@@ -6,6 +6,7 @@ import com.genericmethod.games.snap.enums.Suit;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PlayerTest {
 
@@ -30,6 +31,19 @@ public class PlayerTest {
         assertEquals(1, player.getCards().size());
         player.playCard();
         assertEquals(0, player.getCards().size());
+    }
+
+    @Test
+    public void testPlayerHasCards(){
+        CardPlayer player = new CardPlayer("Matt");
+        player.addCard(new Card(Rank.ACE, Suit.CLUBS));
+        assertTrue(player.hasCards());
+    }
+
+    @Test
+    public void testPlayerHasNoCards(){
+        CardPlayer player = new CardPlayer("Matt");
+        assertTrue(player.hasNoCards());
     }
 
 }

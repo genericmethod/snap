@@ -17,7 +17,8 @@ public class CardPlayer extends Player{
     }
 
     /**
-     * Give the player a card
+     * Add a card to the player's stack of cards
+     * @param card The {@link Card} to be added
      */
     public void addCard(Card card){
         cards.push(card);
@@ -32,18 +33,36 @@ public class CardPlayer extends Player{
         return cards.pop();
     }
 
+    /**
+     * Returs all the players cards
+     * @return {@link Stack} of {@link Card} objects
+     */
     public Stack<Card> getCards() {
         return cards;
     }
 
-    public void addCards(Stack<Card> pile) {
-        cards.addAll(pile);
+    /**
+     * Adds a stack of cards to the player's current stack
+     * @param cards {@link Stack} of {@link Card} objects
+     */
+    public void addCards(Stack<Card> cards) {
+        this.cards.addAll(cards);
     }
 
+    /**
+     * Returns true if the player has cards in his stack
+     * otherwise returns false
+     * @return true or false
+     */
     public boolean hasCards(){
         return getCards().size() != 0;
     }
 
+    /**
+     * Returns true if the player has no cards in his stack
+     * otherwise returns false
+     * @return true or false
+     */
     public boolean hasNoCards(){
         return !hasCards();
     }
