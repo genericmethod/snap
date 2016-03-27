@@ -12,6 +12,7 @@ public class PlayerTest {
     @Test
     public void testPlayerInit(){
         Player player = new Player("Matt");
+        assertEquals("Matt", player.getPlayerName());
         assertEquals(0, player.getCards().size());
     }
 
