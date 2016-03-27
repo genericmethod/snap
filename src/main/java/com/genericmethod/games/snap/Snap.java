@@ -36,7 +36,7 @@ public class Snap {
      * Deals the cards to the players
      */
     private void dealCards() {
-
+        totalNumberOfCards = 0;
         //for each deck, deal cards to the players until the deck is empty
         for (Deck deck : decks) {
             deck.shuffle();
@@ -74,16 +74,24 @@ public class Snap {
                         //TODO: randomize the player that calls snap.
                         //if the top card matches the played card
                         //and remove all the cards from the middle pile
-                        //currentyly
                         player.addCards(pile);
                         pile.removeAllElements();
                         System.out.println(player.getPlayerName() + " called SNAP!");
                     }
 
+                    //if the player has all the cards
+                    //then the game is finished and he is the winner
                     if (playerHasAllCards(player)) {
                         gameIsFinished = true;
                         winner = player;
                         System.out.println(player.getPlayerName() + " is the WINNER");
+                        break;
+                    }
+
+                    //if the pile size has all the cards
+                    //then deal the cards again
+                    if (pile.size() == totalNumberOfCards){
+                        dealCards();
                     }
 
                     System.out.println(player.getPlayerName() + " number of cards = " + player.getCards().size());

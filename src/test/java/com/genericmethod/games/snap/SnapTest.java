@@ -36,6 +36,21 @@ public class SnapTest {
     }
 
     @Test
+    public void testSnapInitNoPlayers(){
+
+    }
+
+    @Test
+    public void testSnapInitNoDecks(){
+
+    }
+
+    @Test
+    public void testSnapInitNoMatchMode(){
+
+    }
+
+    @Test
     public void testSnapPlay() {
 
         Map<String,Player> players = new HashMap<String, Player>();
@@ -50,6 +65,5 @@ public class SnapTest {
 
         Snap snap = new Snap(players, decks, MatchMode.RANK);
         snap.play();
-
     }
 }
