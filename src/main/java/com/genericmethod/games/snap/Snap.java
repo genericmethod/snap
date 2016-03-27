@@ -56,20 +56,38 @@ public class Snap {
         while (!gameIsFinished) {
 
             for (Player player : players.values()) {
-                Card topCard = pile.peek();
-                Card playedCard = player.playCard();
 
-                if (isSnap(matchMode, topCard, playedCard)) {
-                    //if the top card matches the played card
-                    //and remove all the cards from the middle pile
-                    player.addCards(pile);
-                    pile.removeAllElements();
-                }
+                if (player.hasCards()) {
+                    System.out.println(player.getPlayerName() + " is playing his turn");
+                    System.out.println(player.getPlayerName() + " number of cards = " + player.getCards().size());
+                    System.out.println("Number of Cards in the Middle Pile is " + pile.size());
+                    Card topCard = null;
 
-                if(playerHasAllCards(player)){
-                    gameIsFinished = true;
-                    winner = player;
+                    if (pile.size() != 0) {
+                        topCard = pile.peek();
+                    }
 
+                    Card playedCard = player.playCard();
+                    pile.push(playedCard);
+
+                    if (isSnap(matchMode, topCard, playedCard)) {
+                        //TODO: randomize the player that calls snap.
+                        //if the top card matches the played card
+                        //and remove all the cards from the middle pile
+                        //currentyly
+                        player.addCards(pile);
+                        pile.removeAllElements();
+                        System.out.println(player.getPlayerName() + " called SNAP!");
+                    }
+
+                    if (playerHasAllCards(player)) {
+                        gameIsFinished = true;
+                        winner = player;
+                        System.out.println(player.getPlayerName() + " is the WINNER");
+                    }
+
+                    System.out.println(player.getPlayerName() + " number of cards = " + player.getCards().size());
+                    System.out.println("Number of Cards in the Middle Pile is " + pile.size());
                 }
             }
         }
@@ -80,6 +98,10 @@ public class Snap {
     }
 
     private boolean isSnap(MatchMode matchMode, Card topCard, Card playedCard) {
+
+        if (topCard == null) {
+            return false;
+        }
 
         switch (matchMode) {
             case RANK:

@@ -44,4 +44,12 @@ public class Player {
     public void addCards(Stack<Card> pile) {
         cards.addAll(pile);
     }
+
+    public boolean hasCards(){
+        return getCards().size() != 0;
+    }
+
+    public boolean hasNoCards(){
+        return !hasCards();
+    }
 }
