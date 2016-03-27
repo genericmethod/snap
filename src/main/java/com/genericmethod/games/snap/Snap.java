@@ -84,7 +84,7 @@ public class Snap extends CardGame {
             //if the player has all the cards
             //then the game is finished and he is the winner
             if (playerHasAllCards(player)) {
-                setGameIsFinished(true);
+                setGameToFinished();
                 winner = player;
                 System.out.println(player.getPlayerName() + " is the WINNER");
                 return true;

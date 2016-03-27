@@ -4,6 +4,9 @@ import com.genericmethod.games.snap.player.CardPlayer;
 
 import java.util.Map;
 
+/**
+ * Implement any Card Game by extending this class
+ */
 public abstract class CardGame {
 
     private Map<String, CardPlayer> players;
@@ -14,6 +17,25 @@ public abstract class CardGame {
         this.gameIsFinished = false;
     }
 
+    /**
+     * Use this method to perform any initial tasks related to the game being implemented,
+     * such as dealing cards to the players.
+     */
+    protected abstract void init();
+
+    /**
+     * Use this method to implement the rules related to the game being implemented.
+     * If the  player has won the game at his turn return true, otherwise return false.
+     * @param player The player that is currently playing his turn.
+     * @return True if the player has won the game at his turn
+     */
+    protected abstract boolean executePlayerTurn(CardPlayer player);
+
+    /**
+     * Runs the Game.
+     * After running the init method, each player takes his turn at the game.
+     * The game is stopped one the game is finished.
+     */
     public void play() {
         init();
         System.out.println("Gameplay started!");
@@ -24,22 +46,32 @@ public abstract class CardGame {
         }
     }
 
-    protected abstract void init();
-    protected abstract boolean executePlayerTurn(CardPlayer player);
-
     public Map<String, CardPlayer> getPlayers() {
         return players;
     }
 
-    public boolean isGameIsFinished() {
+    /**
+     * Returns true if the game has ended,
+     * otherwise returns false.
+     * @return true or false
+     */
+    public boolean isGameFinished() {
         return gameIsFinished;
     }
 
+    /**
+     * Returns true if the game is still in play,
+     * otherwise returns false.
+     * @return true or false
+     */
     public boolean gameIsNotFinished() {
-        return !isGameIsFinished();
+        return !isGameFinished();
     }
 
-    public void setGameIsFinished(boolean gameIsFinished) {
-        this.gameIsFinished = gameIsFinished;
+    /**
+     * Sets the game to finished
+     */
+    public void setGameToFinished() {
+        this.gameIsFinished = true;
     }
 }
