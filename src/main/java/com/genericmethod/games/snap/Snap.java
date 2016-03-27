@@ -32,7 +32,6 @@ public class Snap extends CardGame {
 
         this.matchMode = matchMode;
         this.decks = decks;
-        dealCards();
     }
 
     /**
@@ -51,6 +50,11 @@ public class Snap extends CardGame {
         }
     }
 
+
+    @Override
+    protected void init() {
+        dealCards();
+    }
 
     public boolean executePlayerTurn(CardPlayer player) {
 

@@ -15,6 +15,7 @@ public abstract class CardGame {
     }
 
     public void play() {
+        init();
         while (gameIsNotFinished()) {
             for (CardPlayer player : getPlayers().values()) {
                 executePlayerTurn(player);
@@ -22,8 +23,8 @@ public abstract class CardGame {
         }
     }
 
+    protected abstract void init();
     protected abstract boolean executePlayerTurn(CardPlayer player);
-    public abstract void dealCards();
 
     public Map<String, CardPlayer> getPlayers() {
         return players;

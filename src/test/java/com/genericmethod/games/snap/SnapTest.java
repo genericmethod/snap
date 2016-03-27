@@ -29,6 +29,7 @@ public class SnapTest {
         decks.add(new Deck());
 
         Snap snap = new Snap(players, decks, MatchMode.RANK);
+        snap.dealCards();
 
         assertEquals(52, snap.getPlayers().get("matt").getCards().size());
         assertEquals(52, snap.getPlayers().get("chris").getCards().size());
