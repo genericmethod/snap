@@ -2,6 +2,7 @@ package com.genericmethod.games.snap;
 
 import com.genericmethod.games.snap.deck.Deck;
 import com.genericmethod.games.snap.enums.MatchMode;
+import com.genericmethod.games.snap.exception.SnapException;
 import com.genericmethod.games.snap.player.Player;
 import org.junit.Test;
 
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 public class SnapTest {
 
     @Test
-    public void testSnapInit() {
+    public void testSnapInit() throws SnapException {
 
         Map<String,Player> players = new HashMap<String, Player>();
         Player playerOne = new Player("matt");
@@ -35,23 +36,62 @@ public class SnapTest {
         assertEquals(104, snap.getTotalNumberOfCards());
     }
 
-    @Test
-    public void testSnapInitNoPlayers(){
+    @Test(expected = SnapException.class)
+    public void testSnapOnePlayer() throws SnapException {
+
+        Map<String,Player> players = new HashMap<String, Player>();
+        Player playerOne = new Player("matt");
+        players.put(playerOne.getPlayerName(), playerOne);
+
+        Set<Deck> decks = new HashSet<Deck>();
+        decks.add(new Deck());
+        decks.add(new Deck());
+
+        Snap snap = new Snap(players, decks, MatchMode.RANK);
+    }
+
+    @Test(expected = SnapException.class)
+    public void testSnapInitNoPlayers() throws SnapException {
+
+        Set<Deck> decks = new HashSet<Deck>();
+        decks.add(new Deck());
+        decks.add(new Deck());
+
+        Snap snap = new Snap(null, decks, MatchMode.RANK);
+    }
+
+    @Test(expected = SnapException.class)
+    public void testSnapInitNoDecks() throws SnapException {
+
+        Map<String,Player> players = new HashMap<String, Player>();
+        Player playerOne = new Player("matt");
+        players.put(playerOne.getPlayerName(), playerOne);
+        Player playerTwo = new Player("chris");
+        players.put(playerTwo.getPlayerName(), playerTwo);
+
+        Snap snap = new Snap(players, null, MatchMode.RANK);
+
 
     }
 
-    @Test
-    public void testSnapInitNoDecks(){
+    @Test(expected = SnapException.class)
+    public void testSnapInitNoMatchMode() throws SnapException {
 
+        Map<String,Player> players = new HashMap<String, Player>();
+        Player playerOne = new Player("matt");
+        players.put(playerOne.getPlayerName(), playerOne);
+        Player playerTwo = new Player("chris");
+        players.put(playerTwo.getPlayerName(), playerTwo);
+
+        Set<Deck> decks = new HashSet<Deck>();
+        decks.add(new Deck());
+        decks.add(new Deck());
+
+        Snap snap = new Snap(players, decks, null);
     }
 
     @Test
-    public void testSnapInitNoMatchMode(){
-
-    }
-
-    @Test
-    public void testSnapPlay() {
+    public void testSnapPlay() throws SnapException {
 
         Map<String,Player> players = new HashMap<String, Player>();
         Player playerOne = new Player("matt");

@@ -3,6 +3,7 @@ package com.genericmethod.games.snap;
 import com.genericmethod.games.snap.card.Card;
 import com.genericmethod.games.snap.deck.Deck;
 import com.genericmethod.games.snap.enums.MatchMode;
+import com.genericmethod.games.snap.exception.SnapException;
 import com.genericmethod.games.snap.player.Player;
 
 import java.util.Map;
@@ -19,11 +20,19 @@ public class Snap {
     private Player winner;
     private int totalNumberOfCards;
 
-    public Snap(Map<String, Player> players, Set<Deck> decks, MatchMode matchMode) {
+    public Snap(Map<String, Player> players, Set<Deck> decks, MatchMode matchMode) throws SnapException {
         //validate
         //Number of players must be greater than 2
         //Number of decks must not be null and greater than 1
         //Match mode must be defined
+
+        if (players == null || decks == null || matchMode == null) {
+            throw new SnapException("Invalid parameters. Please make sure all parameters are defined");
+        }
+
+        if(players.size() <= 1){
+            throw new SnapException("Snap requires a minimum of 2 players");
+        }
 
         this.matchMode = matchMode;
         this.players = players;
