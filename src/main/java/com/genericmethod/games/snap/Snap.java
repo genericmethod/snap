@@ -4,7 +4,7 @@ import com.genericmethod.games.snap.card.Card;
 import com.genericmethod.games.snap.deck.Deck;
 import com.genericmethod.games.snap.enums.MatchMode;
 import com.genericmethod.games.snap.exception.SnapException;
-import com.genericmethod.games.snap.player.Player;
+import com.genericmethod.games.snap.player.CardPlayer;
 
 import java.util.Map;
 import java.util.Set;
@@ -12,15 +12,15 @@ import java.util.Stack;
 
 public class Snap {
 
-    private Map<String, Player> players;
+    private Map<String, CardPlayer> players;
     private Set<Deck> decks;
     private Stack<Card> pile = new Stack<Card>();
     private MatchMode matchMode;
     private boolean gameIsFinished;
-    private Player winner;
+    private CardPlayer winner;
     private int totalNumberOfCards;
 
-    public Snap(Map<String, Player> players, Set<Deck> decks, MatchMode matchMode) throws SnapException {
+    public Snap(Map<String, CardPlayer> players, Set<Deck> decks, MatchMode matchMode) throws SnapException {
         //validate
         //Number of players must be greater than 2
         //Number of decks must not be null and greater than 1
@@ -50,7 +50,7 @@ public class Snap {
         for (Deck deck : decks) {
             deck.shuffle();
             while (deck.isNotEmpty())
-                for (Player player : players.values()) {
+                for (CardPlayer player : players.values()) {
                     player.addCard(deck.dealCard());
                     totalNumberOfCards++;
                 }
@@ -64,7 +64,7 @@ public class Snap {
 
         while (!gameIsFinished) {
 
-            for (Player player : players.values()) {
+            for (CardPlayer player : players.values()) {
 
                 if (player.hasCards()) {
                     System.out.println(player.getPlayerName() + " is playing his turn");
@@ -110,7 +110,7 @@ public class Snap {
         }
     }
 
-    private boolean playerHasAllCards(Player player) {
+    private boolean playerHasAllCards(CardPlayer player) {
         return player.getCards().size() == getTotalNumberOfCards();
     }
 
@@ -132,7 +132,7 @@ public class Snap {
         }
     }
 
-    public Map<String, Player> getPlayers() {
+    public Map<String, CardPlayer> getPlayers() {
         return players;
     }
 
@@ -140,7 +140,7 @@ public class Snap {
         return totalNumberOfCards;
     }
 
-    public Player getWinner() {
+    public CardPlayer getWinner() {
         return winner;
     }
 }

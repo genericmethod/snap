@@ -11,21 +11,21 @@ public class PlayerTest {
 
     @Test
     public void testPlayerInit(){
-        Player player = new Player("Matt");
+        CardPlayer player = new CardPlayer("Matt");
         assertEquals("Matt", player.getPlayerName());
         assertEquals(0, player.getCards().size());
     }
 
     @Test
     public void testAddCard(){
-        Player player = new Player("Matt");
+        CardPlayer player = new CardPlayer("Matt");
         player.addCard(new Card(Rank.ACE, Suit.CLUBS));
         assertEquals(1, player.getCards().size());
     }
 
     @Test
     public void testPlayCard(){
-        Player player = new Player("Matt");
+        CardPlayer player = new CardPlayer("Matt");
         player.addCard(new Card(Rank.ACE, Suit.CLUBS));
         assertEquals(1, player.getCards().size());
         player.playCard();
