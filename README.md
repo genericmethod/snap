@@ -8,7 +8,7 @@ Started!
 #TODO
 - Create Game abstract class  - DONE
 - Generalise Player class structure - DONE
-- Additional Unit tests for Snap class
-- Create console application
+- Snap class coverage
+- Create console application - DONE
 - Randomize player that calls SNAP!
 
