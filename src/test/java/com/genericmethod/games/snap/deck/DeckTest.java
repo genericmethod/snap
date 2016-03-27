@@ -11,7 +11,7 @@ public class DeckTest {
     public void testDeck(){
         Deck deck = new Deck();
         assertEquals(52, deck.getUnshuffledCardsCards().size());
-        assertEquals(null, deck.getShuffledCards());
+        assertEquals(0, deck.getShuffledCards().size());
     }
 
     @Test

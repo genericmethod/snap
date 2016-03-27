@@ -1,6 +1,7 @@
 package com.genericmethod.games.snap;
 
 import com.genericmethod.games.snap.deck.Deck;
+import com.genericmethod.games.snap.enums.MatchMode;
 import com.genericmethod.games.snap.player.Player;
 import org.junit.Test;
 
@@ -26,9 +27,11 @@ public class SnapTest {
         decks.add(new Deck());
         decks.add(new Deck());
 
-        Snap snap = new Snap(players, decks);
+        Snap snap = new Snap(players, decks, MatchMode.RANK);
 
         assertEquals(52, snap.getPlayers().get("matt").getCards().size());
         assertEquals(52, snap.getPlayers().get("chris").getCards().size());
+
+        assertEquals(104, snap.getTotalNumberOfCards());
     }
 }

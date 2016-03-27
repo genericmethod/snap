@@ -40,4 +40,8 @@ public class Player {
     public String getPlayerName() {
         return playerName;
     }
+
+    public void addCards(Stack<Card> pile) {
+        cards.addAll(pile);
+    }
 }
