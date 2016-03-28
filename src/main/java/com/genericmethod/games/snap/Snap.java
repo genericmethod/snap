@@ -3,9 +3,10 @@ package com.genericmethod.games.snap;
 import com.genericmethod.games.framework.CardGame;
 import com.genericmethod.games.framework.card.Card;
 import com.genericmethod.games.framework.deck.Deck;
+import com.genericmethod.games.framework.player.CardPlayer;
 import com.genericmethod.games.snap.enums.MatchMode;
 import com.genericmethod.games.snap.exception.SnapException;
-import com.genericmethod.games.framework.player.CardPlayer;
+import com.genericmethod.games.snap.util.PlayerUtil;
 import com.genericmethod.games.snap.util.SnapUtil;
 
 import java.util.Map;
@@ -66,6 +67,7 @@ public class Snap extends CardGame {
      * 3. The player that calls out Snap takes the current pile of cards.
      * 4. If the player has all the cards then he has won the game.
      * 5. If both players have no cards then the cards are dealt again.
+     * 6. If only one player remains with cards, the player keeps on playing until a match is made
      * @param player The player that is currently playing his turn.
      * @return
      */
@@ -74,7 +76,7 @@ public class Snap extends CardGame {
         if (player.hasCards()) {
 
             System.out.println("******" + player.getPlayerName() + " is playing his turn *******");
-            System.out.println(player.getPlayerName() + " number of cards = " + player.getCards().size());
+            System.out.println(player.getPlayerName() + " number of cards BEFORE turn = " + player.getCards().size());
             System.out.println("Number of Cards in the Middle Pile is " + pile.size());
 
             Card topCard = getTopCard();
@@ -85,11 +87,12 @@ public class Snap extends CardGame {
             if (SnapUtil.isSnap(matchMode, topCard, playedCard)) {
                 //TODO: randomize the player that calls snap.
                 //if the top card matches the played card
-                // give the player all the cards in the pile
+                // ive the player all the cards in the pile
                 //and remove all the cards from the middle pile
-                player.addCards(pile);
+                final CardPlayer randomPlayer = PlayerUtil.getRandomPlayer(getPlayers());
+                randomPlayer.addCards(pile);
                 pile.removeAllElements();
-                System.out.println(player.getPlayerName() + " called SNAP!");
+                System.out.println(randomPlayer.getPlayerName() + " called SNAP!");
             }
 
             //if the player has all the cards
@@ -102,14 +105,16 @@ public class Snap extends CardGame {
             }
 
             //if the pile has all the cards then no one has won the game
-            //then deal the cards again
+            //then deal the cards again and remove them from the middle pile
             if (pile.size() == totalNumberOfCards){
                 dealCards();
+                pile.removeAllElements();
                 System.out.println("No Winner :( - Cards Dealt Again");
             }
 
-            System.out.println(player.getPlayerName() + " number of cards = " + player.getCards().size());
+            System.out.println(player.getPlayerName() + " number of cards AFTER turn = " + player.getCards().size());
             System.out.println("Number of Cards in the Middle Pile is " + pile.size());
+            System.out.println("******" + player.getPlayerName() + " is FINISHED playing his turn *******");
 
         }
 
