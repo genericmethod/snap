@@ -1,15 +1,30 @@
-# snap
+# SNAP!
 A simulation of a game of Snap between two players
 
-Started!
+## Requirements
+- JAVA 8
+- Maven
 
-2 Hours Up !
+## Usage
+clone repo
+```
+https://github.com/genericmethod/snap.git
+```
 
-#TODO
+build the jar
+```
+mvn package
+```
+
+run the jar
+```
+java -jar target/snap-1.0-SNAPSHOT-jar-with-dependencies.jar
+```
+
+## TODO
 - Create Game abstract class  - DONE
 - Generalise Player class structure - DONE
 - Create console application - DONE
+- Randomize player that calls SNAP! - DONE
 - Snap class coverage
-- Randomize player that calls SNAP!
 - Use JAVA8 features where appropriate
-
