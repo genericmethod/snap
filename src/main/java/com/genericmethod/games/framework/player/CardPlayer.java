@@ -1,6 +1,7 @@
 package com.genericmethod.games.framework.player;
 
 import com.genericmethod.games.framework.card.Card;
+import com.genericmethod.games.snap.CardPile;
 
 import java.util.Stack;
 
@@ -47,6 +48,14 @@ public class CardPlayer extends Player{
      */
     public void addCards(Stack<Card> cards) {
         this.cards.addAll(cards);
+    }
+
+    /**
+     * Adds a stack of cards to the player's current stack
+     * @param pile {@link CardPile}
+     */
+    public void addCards(CardPile pile) {
+        this.cards.addAll(pile.getCards());
     }
 
     /**

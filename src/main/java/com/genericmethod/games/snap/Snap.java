@@ -11,12 +11,11 @@ import com.genericmethod.games.snap.util.SnapUtil;
 
 import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
 
 public class Snap extends CardGame {
 
     private Set<Deck> decks;
-    private Stack<Card> pile = new Stack<Card>();
+    private CardPile pile;
     private MatchMode matchMode;
     private CardPlayer winner;
     private int totalNumberOfCards;
@@ -33,6 +32,7 @@ public class Snap extends CardGame {
             throw new SnapException("Snap requires a minimum of 2 players");
         }
 
+        pile = new CardPile();
         this.matchMode = matchMode;
         this.decks = decks;
     }
@@ -52,7 +52,6 @@ public class Snap extends CardGame {
                 }
         }
     }
-
 
     @Override
     protected void init() {
@@ -77,22 +76,15 @@ public class Snap extends CardGame {
 
             System.out.println("******" + player.getPlayerName() + " is playing his turn *******");
             System.out.println(player.getPlayerName() + " number of cards BEFORE turn = " + player.getCards().size());
-            System.out.println("Number of Cards in the Middle Pile is " + pile.size());
+            System.out.println("Number of Cards in the Middle Pile is " + pile.cardCount());
 
-            Card topCard = getTopCard();
+            Card topCard = pile.topCard();
 
             Card playedCard = player.playCard();
-            pile.push(playedCard);
+            pile.add(playedCard);
 
             if (SnapUtil.isSnap(matchMode, topCard, playedCard)) {
-                //TODO: randomize the player that calls snap.
-                //if the top card matches the played card
-                // ive the player all the cards in the pile
-                //and remove all the cards from the middle pile
-                final CardPlayer randomPlayer = PlayerUtil.getRandomPlayer(getPlayers());
-                randomPlayer.addCards(pile);
-                pile.removeAllElements();
-                System.out.println(randomPlayer.getPlayerName() + " called SNAP!");
+                handleSnap();
             }
 
             //if the player has all the cards
@@ -106,14 +98,14 @@ public class Snap extends CardGame {
 
             //if the pile has all the cards then no one has won the game
             //then deal the cards again and remove them from the middle pile
-            if (pile.size() == totalNumberOfCards){
+            if (pile.cardCount() == totalNumberOfCards){
                 dealCards();
-                pile.removeAllElements();
+                pile.clear();
                 System.out.println("No Winner :( - Cards Dealt Again");
             }
 
             System.out.println(player.getPlayerName() + " number of cards AFTER turn = " + player.getCards().size());
-            System.out.println("Number of Cards in the Middle Pile is " + pile.size());
+            System.out.println("Number of Cards in the Middle Pile is " + pile.cardCount());
             System.out.println("******" + player.getPlayerName() + " is FINISHED playing his turn *******");
 
         }
@@ -121,16 +113,14 @@ public class Snap extends CardGame {
         return false;
     }
 
-    /**
-     * Get the card at the top of the middle pile
-     * @return {@link Card}
-     */
-    private Card getTopCard() {
-        Card topCard = null;
-        if (pile.size() != 0) {
-            topCard = pile.peek();
-        }
-        return topCard;
+    private void handleSnap() {
+        //if the top card matches the played card
+        //give a random player all the cards in the pile
+        //and remove all the cards from the middle pile
+        final CardPlayer randomPlayer = PlayerUtil.getRandomPlayer(getPlayers());
+        randomPlayer.addCards(pile);
+        pile.clear();
+        System.out.println(randomPlayer.getPlayerName() + " called SNAP!");
     }
 
     private boolean playerHasAllCards(CardPlayer player) {
