@@ -2,7 +2,7 @@
 A simulation of a game of Snap between two players
 
 ## Requirements
-- JAVA 8
+- Java 8
 - Maven
 
 ## Usage
@@ -26,5 +26,6 @@ java -jar target/snap-1.0-SNAPSHOT-jar-with-dependencies.jar
 - Generalise Player class structure - DONE
 - Create console application - DONE
 - Randomize player that calls SNAP! - DONE
+- Use Java 8 features where appropriate
 - Snap class coverage
-- Use JAVA8 features where appropriate
+
