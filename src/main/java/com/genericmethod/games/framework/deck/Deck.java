@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class Deck {
 
-    private List<Card> unshuffledCards;
+    private Set<Card> unshuffledCards;
     private Stack<Card> shuffledCards;
 
     /**
@@ -19,7 +19,7 @@ public class Deck {
      */
     public Deck() {
         //initialise a set of 52 cards
-        unshuffledCards = new ArrayList<Card>();
+        unshuffledCards = new HashSet<Card>();
         shuffledCards = new Stack<Card>();
         for (Suit suit : Suit.values()) {
             for(Rank rank: Rank.values()){
@@ -33,7 +33,8 @@ public class Deck {
      */
     public void shuffle(){
         shuffledCards = new Stack<Card>();
-        Collections.shuffle(unshuffledCards);
+        final ArrayList<Card> cards = new ArrayList<Card>(unshuffledCards);
+        Collections.shuffle(cards);
         for (Card card : unshuffledCards) {
             shuffledCards.push(card);
         }
@@ -51,7 +52,7 @@ public class Deck {
      * Return the cards in the unshuffled state.
      * @return
      */
-    public List<Card> getUnshuffledCards() {
+    public Set<Card> getUnshuffledCards() {
         return unshuffledCards;
     }
 
