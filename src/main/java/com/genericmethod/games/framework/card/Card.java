@@ -3,7 +3,6 @@ package com.genericmethod.games.framework.card;
 import com.genericmethod.games.framework.enums.Rank;
 import com.genericmethod.games.framework.enums.Suit;
 import com.google.common.base.Objects;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Represents a Card within a deck of cards.
@@ -45,9 +44,9 @@ public class Card {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("rank", rank)
-                .append("suit", suit)
+        return new StringBuilder()
+                .append(rank.getValue())
+                .append(suit)
                 .toString();
     }
 }

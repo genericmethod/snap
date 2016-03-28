@@ -28,7 +28,7 @@ public class Snap extends CardGame {
             throw new SnapException("Invalid parameters. Please make sure all parameters are defined");
         }
 
-        if(players.size() <= 1){
+        if (players.size() <= 1) {
             throw new SnapException("Snap requires a minimum of 2 players");
         }
 
@@ -67,6 +67,7 @@ public class Snap extends CardGame {
      * 4. If the player has all the cards then he has won the game.
      * 5. If both players have no cards then the cards are dealt again.
      * 6. If only one player remains with cards, the player keeps on playing until a match is made
+     *
      * @param player The player that is currently playing his turn.
      * @return
      */
@@ -74,11 +75,7 @@ public class Snap extends CardGame {
 
         if (player.hasCards()) {
 
-            System.out.println("******" + player.getPlayerName() + " is playing his turn *******");
-            System.out.println(player.getPlayerName() + " number of cards BEFORE turn = " + player.getCards().size());
-            System.out.println("Number of Cards in the Middle Pile is " + pile.cardCount());
-
-            Card topCard = pile.topCard();
+            final Card topCard = pile.topCard();
 
             Card playedCard = player.playCard();
             pile.add(playedCard);
@@ -88,29 +85,48 @@ public class Snap extends CardGame {
             }
 
             //if the player has all the cards
-            //then the game is finished and he is the winner
+            //then the game is finished and is the winner
             if (playerHasAllCards(player)) {
                 setGameToFinished();
                 winner = player;
+                printGameState(player.getPlayerName(), player.getCards().size(), pile.cardCount(), topCard, playedCard, false);
                 System.out.println(player.getPlayerName() + " is the WINNER");
                 return true;
             }
 
             //if the pile has all the cards then no one has won the game
             //then deal the cards again and remove them from the middle pile
-            if (pile.cardCount() == totalNumberOfCards){
+            if (pile.cardCount() == totalNumberOfCards) {
                 dealCards();
                 pile.clear();
                 System.out.println("No Winner :( - Cards Dealt Again");
             }
 
-            System.out.println(player.getPlayerName() + " number of cards AFTER turn = " + player.getCards().size());
-            System.out.println("Number of Cards in the Middle Pile is " + pile.cardCount());
-            System.out.println("******" + player.getPlayerName() + " is FINISHED playing his turn *******");
-
+            printGameState(player.getPlayerName(), player.getCards().size(), pile.cardCount(), topCard, playedCard, false);
         }
 
         return false;
+    }
+
+    private void printGameState(String playerName, int numberOfPlayerCards, int pileCardCount, Card topCard, Card playedCard, boolean snap) {
+
+        StringBuilder state = new StringBuilder();
+
+        state.append(playerName)
+                .append("\t| ")
+                .append("number of cards: ")
+                .append(numberOfPlayerCards)
+                .append("\t| ")
+                .append("card pile count : ")
+                .append(pileCardCount)
+                .append("\t| ")
+                .append("top card : ")
+                .append(topCard != null ? topCard.toString() : "-----")
+                .append("\t| ")
+                .append("played card : ")
+                .append(playedCard.toString());
+        System.out.println(state.toString());
+
     }
 
     private void handleSnap() {
