@@ -1,7 +1,7 @@
-package com.genericmethod.games.snap.card;
+package com.genericmethod.games.framework.card;
 
-import com.genericmethod.games.snap.enums.Rank;
-import com.genericmethod.games.snap.enums.Suit;
+import com.genericmethod.games.framework.enums.Rank;
+import com.genericmethod.games.framework.enums.Suit;
 import com.google.common.base.Objects;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

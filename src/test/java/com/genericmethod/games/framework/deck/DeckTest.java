@@ -1,4 +1,4 @@
-package com.genericmethod.games.snap.deck;
+package com.genericmethod.games.framework.deck;
 
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ public class DeckTest {
     @Test
     public void testDeck(){
         Deck deck = new Deck();
-        assertEquals(52, deck.getUnshuffledCardsCards().size());
+        assertEquals(52, deck.getUnshuffledCards().size());
         assertEquals(0, deck.getShuffledCards().size());
     }
 

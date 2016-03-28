@@ -1,6 +1,6 @@
 package com.genericmethod.games.snap.util;
 
-import com.genericmethod.games.snap.card.Card;
+import com.genericmethod.games.framework.card.Card;
 import com.genericmethod.games.snap.enums.MatchMode;
 
 public class SnapUtil {

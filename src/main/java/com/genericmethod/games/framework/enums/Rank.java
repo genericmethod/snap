@@ -1,4 +1,4 @@
-package com.genericmethod.games.snap.enums;
+package com.genericmethod.games.framework.enums;
 
 
 /**

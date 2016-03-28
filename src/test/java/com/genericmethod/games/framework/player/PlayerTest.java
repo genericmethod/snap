@@ -1,8 +1,8 @@
-package com.genericmethod.games.snap.player;
+package com.genericmethod.games.framework.player;
 
-import com.genericmethod.games.snap.card.Card;
-import com.genericmethod.games.snap.enums.Rank;
-import com.genericmethod.games.snap.enums.Suit;
+import com.genericmethod.games.framework.card.Card;
+import com.genericmethod.games.framework.enums.Rank;
+import com.genericmethod.games.framework.enums.Suit;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

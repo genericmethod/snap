@@ -1,9 +1,9 @@
 package com.genericmethod.games.snap.util;
 
-import com.genericmethod.games.snap.card.Card;
+import com.genericmethod.games.framework.card.Card;
 import com.genericmethod.games.snap.enums.MatchMode;
-import com.genericmethod.games.snap.enums.Rank;
-import com.genericmethod.games.snap.enums.Suit;
+import com.genericmethod.games.framework.enums.Rank;
+import com.genericmethod.games.framework.enums.Suit;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

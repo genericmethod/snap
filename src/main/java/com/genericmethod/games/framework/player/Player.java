@@ -1,4 +1,4 @@
-package com.genericmethod.games.snap.player;
+package com.genericmethod.games.framework.player;
 
 public class Player {
 

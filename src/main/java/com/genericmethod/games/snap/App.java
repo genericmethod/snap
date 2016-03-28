@@ -1,9 +1,9 @@
 package com.genericmethod.games.snap;
 
-import com.genericmethod.games.snap.deck.Deck;
+import com.genericmethod.games.framework.deck.Deck;
 import com.genericmethod.games.snap.enums.MatchMode;
 import com.genericmethod.games.snap.exception.SnapException;
-import com.genericmethod.games.snap.player.CardPlayer;
+import com.genericmethod.games.framework.player.CardPlayer;
 
 import java.util.*;
 

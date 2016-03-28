@@ -1,6 +1,6 @@
-package com.genericmethod.games.snap.player;
+package com.genericmethod.games.framework.player;
 
-import com.genericmethod.games.snap.card.Card;
+import com.genericmethod.games.framework.card.Card;
 
 import java.util.Stack;
 

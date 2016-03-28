@@ -1,6 +1,6 @@
-package com.genericmethod.games.snap;
+package com.genericmethod.games.framework;
 
-import com.genericmethod.games.snap.player.CardPlayer;
+import com.genericmethod.games.framework.player.CardPlayer;
 
 import java.util.Map;
 
