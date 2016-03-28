@@ -5,6 +5,7 @@ import com.genericmethod.games.snap.deck.Deck;
 import com.genericmethod.games.snap.enums.MatchMode;
 import com.genericmethod.games.snap.exception.SnapException;
 import com.genericmethod.games.snap.player.CardPlayer;
+import com.genericmethod.games.snap.util.SnapUtil;
 
 import java.util.Map;
 import java.util.Set;
@@ -72,7 +73,7 @@ public class Snap extends CardGame {
             Card playedCard = player.playCard();
             pile.push(playedCard);
 
-            if (isSnap(matchMode, topCard, playedCard)) {
+            if (SnapUtil.isSnap(matchMode, topCard, playedCard)) {
                 //TODO: randomize the player that calls snap.
                 //if the top card matches the played card
                 //and remove all the cards from the middle pile
@@ -107,24 +108,6 @@ public class Snap extends CardGame {
 
     private boolean playerHasAllCards(CardPlayer player) {
         return player.getCards().size() == getTotalNumberOfCards();
-    }
-
-    private boolean isSnap(MatchMode matchMode, Card topCard, Card playedCard) {
-
-        if (topCard == null) {
-            return false;
-        }
-
-        switch (matchMode) {
-            case RANK:
-                return topCard.getRank() == playedCard.getRank();
-            case SUIT:
-                return topCard.getSuit() == playedCard.getSuit();
-            case BOTH:
-                return topCard.equals(playedCard);
-            default:
-                return topCard.getRank() == playedCard.getRank();
-        }
     }
 
     public int getTotalNumberOfCards() {
