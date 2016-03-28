@@ -14,7 +14,7 @@ public class CardPlayer extends Player{
 
     public CardPlayer(String playerName) {
         super(playerName);
-        cards = new Stack<Card>();
+        cards = new Stack<>();
     }
 
     /**

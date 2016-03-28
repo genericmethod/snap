@@ -28,6 +28,6 @@ public class PlayerUtil {
      */
     public static CardPlayer getRandomPlayer(Map<String,CardPlayer> players){
         Validate.notEmpty(players);
-        return PlayerUtil.getRandomPlayer(new ArrayList<CardPlayer>(players.values()));
+        return PlayerUtil.getRandomPlayer(new ArrayList<>(players.values()));
     }
 }

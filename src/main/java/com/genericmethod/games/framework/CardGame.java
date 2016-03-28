@@ -40,9 +40,7 @@ public abstract class CardGame {
         init();
         System.out.println("Gameplay started!");
         while (gameIsNotFinished()) {
-            for (CardPlayer player : getPlayers().values()) {
-                executePlayerTurn(player);
-            }
+            getPlayers().values().forEach(this::executePlayerTurn);
         }
     }
 

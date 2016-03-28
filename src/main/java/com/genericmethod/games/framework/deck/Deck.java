@@ -19,25 +19,24 @@ public class Deck {
      */
     public Deck() {
         //initialise a set of 52 cards
-        unshuffledCards = new HashSet<Card>();
-        shuffledCards = new Stack<Card>();
+        unshuffledCards = new HashSet<>();
+        shuffledCards = new Stack<>();
         for (Suit suit : Suit.values()) {
             for(Rank rank: Rank.values()){
                 unshuffledCards.add(new Card(rank, suit));
             }
         }
+
     }
 
     /**
      * Shuffles the deck of cards
      */
     public void shuffle(){
-        shuffledCards = new Stack<Card>();
-        final ArrayList<Card> cards = new ArrayList<Card>(unshuffledCards);
+        shuffledCards = new Stack<>();
+        final ArrayList<Card> cards = new ArrayList<>(unshuffledCards);
         Collections.shuffle(cards);
-        for (Card card : unshuffledCards) {
-            shuffledCards.push(card);
-        }
+        unshuffledCards.forEach(shuffledCards::push);
     }
 
     /**

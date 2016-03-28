@@ -12,7 +12,7 @@ public class CardPile {
     private Stack<Card> cards;
 
     public CardPile() {
-        this.cards = new Stack<Card>();
+        this.cards = new Stack<>();
     }
 
     /**
