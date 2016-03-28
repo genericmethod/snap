@@ -3,6 +3,7 @@ package com.genericmethod.games.snap;
 import com.genericmethod.games.framework.CardGame;
 import com.genericmethod.games.framework.card.Card;
 import com.genericmethod.games.framework.deck.Deck;
+import com.genericmethod.games.framework.exceptions.CardGameException;
 import com.genericmethod.games.framework.player.CardPlayer;
 import com.genericmethod.games.snap.enums.MatchMode;
 import com.genericmethod.games.snap.exception.SnapException;
@@ -20,11 +21,11 @@ public class Snap extends CardGame {
     private CardPlayer winner;
     private int totalNumberOfCards;
 
-    public Snap(Map<String, CardPlayer> players, Set<Deck> decks, MatchMode matchMode) throws SnapException {
+    public Snap(Map<String, CardPlayer> players, Set<Deck> decks, MatchMode matchMode) throws SnapException, CardGameException {
 
         super(players);
 
-        if (players == null || decks == null || matchMode == null) {
+        if (decks == null || matchMode == null) {
             throw new SnapException("Invalid parameters. Please make sure all parameters are defined");
         }
 

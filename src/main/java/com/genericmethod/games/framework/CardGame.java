@@ -1,6 +1,8 @@
 package com.genericmethod.games.framework;
 
+import com.genericmethod.games.framework.exceptions.CardGameException;
 import com.genericmethod.games.framework.player.CardPlayer;
+import org.apache.commons.collections4.MapUtils;
 
 import java.util.Map;
 
@@ -12,7 +14,12 @@ public abstract class CardGame {
     private Map<String, CardPlayer> players;
     private boolean gameIsFinished;
 
-    protected CardGame(Map<String, CardPlayer> players) {
+    protected CardGame(Map<String, CardPlayer> players) throws CardGameException {
+
+        if (MapUtils.isEmpty(players)){
+            throw new CardGameException("At least one player is required");
+        }
+
         this.players = players;
         this.gameIsFinished = false;
     }

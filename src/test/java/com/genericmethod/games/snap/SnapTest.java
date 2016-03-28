@@ -1,6 +1,7 @@
 package com.genericmethod.games.snap;
 
 import com.genericmethod.games.framework.deck.Deck;
+import com.genericmethod.games.framework.exceptions.CardGameException;
 import com.genericmethod.games.snap.enums.MatchMode;
 import com.genericmethod.games.snap.exception.SnapException;
 import com.genericmethod.games.framework.player.CardPlayer;
@@ -16,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 public class SnapTest {
 
     @Test
-    public void testSnapInit() throws SnapException {
+    public void testSnapInit() throws SnapException, CardGameException {
 
         Map<String, CardPlayer> players = new HashMap<String, CardPlayer>();
         CardPlayer playerOne = new CardPlayer("matt");
@@ -38,7 +39,7 @@ public class SnapTest {
     }
 
     @Test(expected = SnapException.class)
-    public void testSnapOnePlayer() throws SnapException {
+    public void testSnapOnePlayer() throws SnapException, CardGameException {
 
         Map<String,CardPlayer> players = new HashMap<String, CardPlayer>();
         CardPlayer playerOne = new CardPlayer("matt");
@@ -51,8 +52,8 @@ public class SnapTest {
         Snap snap = new Snap(players, decks, MatchMode.RANK);
     }
 
-    @Test(expected = SnapException.class)
-    public void testSnapInitNoPlayers() throws SnapException {
+    @Test(expected = CardGameException.class)
+    public void testSnapInitNoPlayers() throws SnapException, CardGameException {
 
         Set<Deck> decks = new HashSet<Deck>();
         decks.add(new Deck());
@@ -62,7 +63,7 @@ public class SnapTest {
     }
 
     @Test(expected = SnapException.class)
-    public void testSnapInitNoDecks() throws SnapException {
+    public void testSnapInitNoDecks() throws SnapException, CardGameException {
 
         Map<String,CardPlayer> players = new HashMap<String, CardPlayer>();
         CardPlayer playerOne = new CardPlayer("matt");
@@ -76,7 +77,7 @@ public class SnapTest {
     }
 
     @Test(expected = SnapException.class)
-    public void testSnapInitNoMatchMode() throws SnapException {
+    public void testSnapInitNoMatchMode() throws SnapException, CardGameException {
 
         Map<String,CardPlayer> players = new HashMap<String, CardPlayer>();
         CardPlayer playerOne = new CardPlayer("matt");
@@ -92,7 +93,7 @@ public class SnapTest {
     }
 
     @Test
-    public void testSnapPlay() throws SnapException {
+    public void testSnapPlay() throws SnapException, CardGameException {
 
         Map<String,CardPlayer> players = new HashMap<String, CardPlayer>();
         CardPlayer playerOne = new CardPlayer("matt");

@@ -1,6 +1,7 @@
 package com.genericmethod.games.snap;
 
 import com.genericmethod.games.framework.deck.Deck;
+import com.genericmethod.games.framework.exceptions.CardGameException;
 import com.genericmethod.games.snap.enums.MatchMode;
 import com.genericmethod.games.snap.exception.SnapException;
 import com.genericmethod.games.framework.player.CardPlayer;
@@ -50,7 +51,7 @@ public class App {
             Snap snap = new Snap(players, decks, matchMode);
             snap.play();
             System.out.println("Snap Finished!");
-        } catch (SnapException e) {
+        } catch (SnapException | CardGameException e) {
             System.out.println("Snap could not be started. Bye!");
             System.out.println("Reason:" + e.getMessage());
         }
