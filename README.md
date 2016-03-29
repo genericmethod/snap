@@ -8,7 +8,7 @@ A simulation of a game of Snap between two players
 ## Usage
 clone repo
 ```
-https://github.com/genericmethod/snap.git
+git clone https://github.com/genericmethod/snap.git
 ```
 
 build the jar
