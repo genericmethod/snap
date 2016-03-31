@@ -17,7 +17,27 @@ public class SampleCardGame extends CardGame {
     }
 
     @Override
-    protected boolean executePlayerTurn(CardPlayer player) {
-        return false;
+    protected void playTurn() {
     }
+
+    @Override
+    protected void postTurn() {
+
+    }
+
+    @Override
+    protected void preTurn() {
+
+    }
+
+    @Override
+    protected void postRound() {
+
+    }
+
+    @Override
+    protected void preRound() {
+
+    }
+
 }

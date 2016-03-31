@@ -1,5 +1,5 @@
 # SNAP!
-A simulation of a game of Snap between two players
+A simulation of a game of Snap between players
 
 ## Requirements
 - Java 8

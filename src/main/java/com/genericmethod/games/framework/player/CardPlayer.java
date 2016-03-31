@@ -8,7 +8,7 @@ import java.util.Stack;
 /**
  * Represents a player in a game of cards
  */
-public class CardPlayer extends Player{
+public class CardPlayer extends Player {
 
     private Stack<Card> cards;
 

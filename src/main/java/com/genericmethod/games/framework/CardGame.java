@@ -9,19 +9,19 @@ import java.util.Map;
 /**
  * Implement any Card Game by extending this class
  */
-public abstract class CardGame {
+public abstract class CardGame implements Playable{
 
     private Map<String, CardPlayer> players;
-    private boolean gameIsFinished;
+    private GameState gameState;
 
     protected CardGame(Map<String, CardPlayer> players) throws CardGameException {
 
         if (MapUtils.isEmpty(players)){
             throw new CardGameException("At least one player is required");
         }
-
         this.players = players;
-        this.gameIsFinished = false;
+        gameState = new GameState();
+        gameState.setFinished(false);
     }
 
     /**
@@ -33,21 +33,52 @@ public abstract class CardGame {
     /**
      * Use this method to implement the rules related to the game being implemented.
      * If the  player has won the game at his turn return true, otherwise return false.
-     * @param player The player that is currently playing his turn.
-     * @return True if the player has won the game at his turn
      */
-    protected abstract boolean executePlayerTurn(CardPlayer player);
+    protected abstract void playTurn();
+
+    /**
+     * Define any logic related to be executed before the player takes his turn
+     */
+    protected abstract void preTurn();
+
+    /**
+     * Define any logic related to be executed after the player takes his turn
+     */
+    protected abstract void postTurn();
+
+    /**
+     * Define any logic executed before the round starts
+     */
+    protected abstract void preRound();
+
+    /**
+     * Define any logic to be executed after the round
+     */
+    protected abstract void postRound();
+
+    /**
+     * Plays a round. A round consists of all the players taking their turn.
+     */
+    protected void playRound(){
+        getPlayers().values().forEach(cardPlayer -> {
+            getGameState().setCurrentPlayer(cardPlayer);
+            preTurn();
+            playTurn();
+            postTurn();
+        });
+    }
 
     /**
      * Runs the Game.
      * After running the init method, each player takes his turn at the game.
-     * The game is stopped one the game is finished.
+     * The game is stopped once the game is finished.
      */
     public void play() {
         init();
-        System.out.println("Gameplay started!");
-        while (gameIsNotFinished()) {
-            getPlayers().values().forEach(this::executePlayerTurn);
+        while (!getGameState().isFinished()) {
+            preRound();
+            playRound();
+            postRound();
         }
     }
 
@@ -56,27 +87,21 @@ public abstract class CardGame {
     }
 
     /**
-     * Returns true if the game has ended,
-     * otherwise returns false.
-     * @return true or false
-     */
-    public boolean isGameFinished() {
-        return gameIsFinished;
-    }
-
-    /**
-     * Returns true if the game is still in play,
-     * otherwise returns false.
-     * @return true or false
-     */
-    public boolean gameIsNotFinished() {
-        return !isGameFinished();
-    }
-
-    /**
      * Sets the game to finished
      */
     public void setGameToFinished() {
-        this.gameIsFinished = true;
+        this.gameState.setFinished(true);
+    }
+
+    public boolean isGameFinished(){
+        return gameState.isFinished();
+    }
+
+    public boolean gameIsNotFinished(){
+        return !isGameFinished();
+    }
+
+    public GameState getGameState() {
+        return gameState;
     }
 }

@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Represents a Deck of {@link Card}
  */
-public class Deck {
+public class Deck implements Shuffleable {
 
     private Set<Card> unshuffledCards;
     private Stack<Card> shuffledCards;
@@ -26,7 +26,6 @@ public class Deck {
                 unshuffledCards.add(new Card(rank, suit));
             }
         }
-
     }
 
     /**

@@ -68,14 +68,13 @@ public class Snap extends CardGame {
      * 4. If the player has all the cards then he has won the game.
      * 5. If both players have no cards then the cards are dealt again.
      * 6. If only one player remains with cards, the player keeps on playing until a match is made
-     *
-     * @param player The player that is currently playing his turn.
-     * @return
      */
-    public boolean executePlayerTurn(CardPlayer player) {
+    public void playTurn() {
+
+        CardPlayer player = getGameState().getCurrentPlayer();
 
         if (player.hasNoCards()) {
-            return false;
+            return;
         }
 
         Card topCard = pile.topCard();
@@ -95,7 +94,7 @@ public class Snap extends CardGame {
             winner = player;
             printGameState(player.getPlayerName(), player.getCards().size(), pile.cardCount(), topCard, playedCard, false);
             System.out.println(player.getPlayerName() + " is the WINNER");
-            return true;
+            return;
         }
 
         //if the pile has all the cards then no one has won the game
@@ -108,7 +107,26 @@ public class Snap extends CardGame {
 
         printGameState(player.getPlayerName(), player.getCards().size(), pile.cardCount(), topCard, playedCard, false);
 
-        return false;
+    }
+
+    @Override
+    protected void postTurn() {
+
+    }
+
+    @Override
+    protected void preTurn() {
+
+    }
+
+    @Override
+    protected void postRound() {
+
+    }
+
+    @Override
+    protected void preRound() {
+
     }
 
     private boolean pileHasAllCards() {
