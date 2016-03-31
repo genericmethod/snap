@@ -8,7 +8,7 @@ import java.util.Map;
 public class SampleCardGame extends CardGame {
 
     protected SampleCardGame(Map<String, CardPlayer> players) throws CardGameException {
-        super(players);
+        super(players, new GameState());
     }
 
     @Override

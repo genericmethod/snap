@@ -1,4 +1,4 @@
-package com.genericmethod.games.snap;
+package com.genericmethod.games.framework;
 
 import com.genericmethod.games.framework.card.Card;
 

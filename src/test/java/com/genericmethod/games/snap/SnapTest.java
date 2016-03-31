@@ -19,7 +19,7 @@ public class SnapTest {
     @Test
     public void testSnapInit() throws SnapException, CardGameException {
 
-        Map<String, CardPlayer> players = new HashMap<String, CardPlayer>();
+        Map<String, CardPlayer> players = new HashMap<>();
         CardPlayer playerOne = new CardPlayer("matt");
         players.put(playerOne.getPlayerName(), playerOne);
         CardPlayer playerTwo = new CardPlayer("chris");
@@ -41,11 +41,11 @@ public class SnapTest {
     @Test(expected = SnapException.class)
     public void testSnapOnePlayer() throws SnapException, CardGameException {
 
-        Map<String,CardPlayer> players = new HashMap<String, CardPlayer>();
+        Map<String,CardPlayer> players = new HashMap<>();
         CardPlayer playerOne = new CardPlayer("matt");
         players.put(playerOne.getPlayerName(), playerOne);
 
-        Set<Deck> decks = new HashSet<Deck>();
+        Set<Deck> decks = new HashSet<>();
         decks.add(new Deck());
         decks.add(new Deck());
 
@@ -55,7 +55,7 @@ public class SnapTest {
     @Test(expected = CardGameException.class)
     public void testSnapInitNoPlayers() throws SnapException, CardGameException {
 
-        Set<Deck> decks = new HashSet<Deck>();
+        Set<Deck> decks = new HashSet<>();
         decks.add(new Deck());
         decks.add(new Deck());
 
@@ -79,13 +79,13 @@ public class SnapTest {
     @Test(expected = SnapException.class)
     public void testSnapInitNoMatchMode() throws SnapException, CardGameException {
 
-        Map<String,CardPlayer> players = new HashMap<String, CardPlayer>();
+        Map<String,CardPlayer> players = new HashMap<>();
         CardPlayer playerOne = new CardPlayer("matt");
         players.put(playerOne.getPlayerName(), playerOne);
         CardPlayer playerTwo = new CardPlayer("chris");
         players.put(playerTwo.getPlayerName(), playerTwo);
 
-        Set<Deck> decks = new HashSet<Deck>();
+        Set<Deck> decks = new HashSet<>();
         decks.add(new Deck());
         decks.add(new Deck());
 
@@ -95,13 +95,13 @@ public class SnapTest {
     @Test
     public void testSnapPlay() throws SnapException, CardGameException {
 
-        Map<String,CardPlayer> players = new HashMap<String, CardPlayer>();
+        Map<String,CardPlayer> players = new HashMap<>();
         CardPlayer playerOne = new CardPlayer("matt");
         players.put(playerOne.getPlayerName(), playerOne);
         CardPlayer playerTwo = new CardPlayer("chris");
         players.put(playerTwo.getPlayerName(), playerTwo);
 
-        Set<Deck> decks = new HashSet<Deck>();
+        Set<Deck> decks = new HashSet<>();
         decks.add(new Deck());
         decks.add(new Deck());
 

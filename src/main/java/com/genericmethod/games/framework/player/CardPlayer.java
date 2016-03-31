@@ -1,7 +1,7 @@
 package com.genericmethod.games.framework.player;
 
 import com.genericmethod.games.framework.card.Card;
-import com.genericmethod.games.snap.CardPile;
+import com.genericmethod.games.framework.CardPile;
 
 import java.util.Stack;
 

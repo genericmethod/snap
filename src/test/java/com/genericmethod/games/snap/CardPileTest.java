@@ -1,5 +1,6 @@
 package com.genericmethod.games.snap;
 
+import com.genericmethod.games.framework.CardPile;
 import com.genericmethod.games.framework.card.Card;
 import com.genericmethod.games.framework.enums.Rank;
 import com.genericmethod.games.framework.enums.Suit;

@@ -1,6 +1,7 @@
 package com.genericmethod.games.snap;
 
 import com.genericmethod.games.framework.CardGame;
+import com.genericmethod.games.framework.CardPile;
 import com.genericmethod.games.framework.card.Card;
 import com.genericmethod.games.framework.deck.Deck;
 import com.genericmethod.games.framework.exceptions.CardGameException;
@@ -13,7 +14,7 @@ import com.genericmethod.games.snap.util.SnapUtil;
 import java.util.Map;
 import java.util.Set;
 
-public class Snap extends CardGame {
+public class Snap extends CardGame<SnapGameState> {
 
     private Set<Deck> decks;
     private CardPile pile;
@@ -21,9 +22,11 @@ public class Snap extends CardGame {
     private CardPlayer winner;
     private int totalNumberOfCards;
 
-    public Snap(Map<String, CardPlayer> players, Set<Deck> decks, MatchMode matchMode) throws SnapException, CardGameException {
+    public Snap(Map<String, CardPlayer> players,
+                Set<Deck> decks,
+                MatchMode matchMode) throws SnapException, CardGameException {
 
-        super(players);
+        super(players, new SnapGameState());
 
         if (decks == null || matchMode == null) {
             throw new SnapException("Invalid parameters. Please make sure all parameters are defined");
@@ -78,8 +81,10 @@ public class Snap extends CardGame {
         }
 
         Card topCard = pile.topCard();
+        getGameState().setTopCard(topCard);
 
         Card playedCard = player.playCard();
+        getGameState().setPlayedCard(playedCard);
         pile.add(playedCard);
 
         if (SnapUtil.isSnap(matchMode, topCard, playedCard)) {
@@ -87,12 +92,22 @@ public class Snap extends CardGame {
             System.out.println("SNAP!");
         }
 
+
+
+    }
+
+    @Override
+    protected void postTurn() {
+
+        CardPlayer player = getGameState().getCurrentPlayer();
+
         //if the player has all the cards
         //then the game is finished and is the winner
         if (playerHasAllCards(player)) {
             setGameToFinished();
             winner = player;
-            printGameState(player.getPlayerName(), player.getCards().size(), pile.cardCount(), topCard, playedCard, false);
+            printGameState(player.getPlayerName(), player.getCards().size(), pile.cardCount(),
+                    getGameState().getTopCard(), getGameState().getPlayedCard(), false);
             System.out.println(player.getPlayerName() + " is the WINNER");
             return;
         }
@@ -105,12 +120,8 @@ public class Snap extends CardGame {
             System.out.println("No Winner :( - Cards Dealt Again");
         }
 
-        printGameState(player.getPlayerName(), player.getCards().size(), pile.cardCount(), topCard, playedCard, false);
-
-    }
-
-    @Override
-    protected void postTurn() {
+        printGameState(player.getPlayerName(), player.getCards().size(), pile.cardCount(),
+                getGameState().getTopCard(), getGameState().getPlayedCard(), false);
 
     }
 

@@ -9,18 +9,18 @@ import java.util.Map;
 /**
  * Implement any Card Game by extending this class
  */
-public abstract class CardGame implements Playable{
+public abstract class CardGame<T extends GameState> implements Playable{
 
     private Map<String, CardPlayer> players;
-    private GameState gameState;
+    private T gameState;
 
-    protected CardGame(Map<String, CardPlayer> players) throws CardGameException {
+    protected CardGame(Map<String, CardPlayer> players, T state) throws CardGameException {
 
         if (MapUtils.isEmpty(players)){
             throw new CardGameException("At least one player is required");
         }
         this.players = players;
-        gameState = new GameState();
+        this.gameState = state;
         gameState.setFinished(false);
     }
 
@@ -101,7 +101,7 @@ public abstract class CardGame implements Playable{
         return !isGameFinished();
     }
 
-    public GameState getGameState() {
+    public T getGameState() {
         return gameState;
     }
 }
